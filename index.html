@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ともしび洞くつ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="hud">
+    <span class="floor" id="hFloor">B1F</span>
+    <span><span class="k">Lv</span><b id="hLv">1</b></span>
+    <span class="hpwrap"><span class="k">HP</span><b id="hHp">15/15</b><span class="bar"><i id="hHpBar"></i></span></span>
+    <span><span class="k">満腹度</span><b id="hFull">100%</b></span>
+    <span><span class="k">ちから</span><b id="hStr">8/8</b></span>
+    <span><span class="k">ゴールド</span><b id="hGold">0</b></span>
+  </header>
+
+  <div class="stage" id="stage"><canvas id="cv" role="img" aria-label="ダンジョンの画面"></canvas></div>
+
+  <ol class="log" id="log" aria-live="polite"></ol>
+
+  <div class="controls">
+    <div class="pad" id="pad">
+      <button data-d="-1,-1" aria-label="左上へ移動">↖</button>
+      <button data-d="0,-1" aria-label="上へ移動">↑</button>
+      <button data-d="1,-1" aria-label="右上へ移動">↗</button>
+      <button data-d="-1,0" aria-label="左へ移動">←</button>
+      <button data-w="1" class="mid" aria-label="足踏み">足踏み</button>
+      <button data-d="1,0" aria-label="右へ移動">→</button>
+      <button data-d="-1,1" aria-label="左下へ移動">↙</button>
+      <button data-d="0,1" aria-label="下へ移動">↓</button>
+      <button data-d="1,1" aria-label="右下へ移動">↘</button>
+    </div>
+    <div class="acts">
+      <button id="bAtk">攻撃</button>
+      <button id="bInv">道具</button>
+      <button id="bFace" aria-pressed="false">向きを変える</button>
+      <button id="bMap" aria-pressed="true">地図</button>
+      <button id="bStairs" disabled>階段を降りる</button>
+    </div>
+  </div>
+
+  <p class="keys">
+    <span><kbd>↑↓←→</kbd><kbd>WASD</kbd>移動</span>
+    <span><kbd>Q</kbd><kbd>E</kbd><kbd>Z</kbd><kbd>C</kbd>斜め移動</span>
+    <span><kbd>Shift</kbd>+方向で向きだけ変える</span>
+    <span><kbd>Space</kbd>攻撃</span>
+    <span><kbd>R</kbd>足踏み</span>
+    <span><kbd>I</kbd>道具</span>
+    <span><kbd>M</kbd>地図</span>
+    <span><kbd>G</kbd>階段を降りる</span>
+  </p>
+</div>
+
+<div class="overlay" id="ov" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+
+<script src="game.js"></script>
+</body>
+</html>
