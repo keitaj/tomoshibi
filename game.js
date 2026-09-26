@@ -584,16 +584,35 @@ function recordBody(b){
 }
 function openRecord(){
   if(!G||G.busy||G.over||modal)return;
+  renderRecord();
+}
+function renderRecord(){
   const b=readBest(),now=G.floor;
   const chase=!b||!b.floor?'':b.floor>=now?`記録更新まであと${b.floor-now+1}階。`:'記録を更新中。';
   showModal(`<h2>最高記録</h2>
     ${recordBody(b)}
     ${now?`<p class="best">いまは地下${now}階。${chase}</p>`:''}
-    <div class="btnrow"><button class="pri" id="rClose" data-focus>とじる</button></div>`,
+    <div class="btnrow">
+      <button class="pri" id="rClose" data-focus>とじる</button>
+      ${b&&b.floor?'<button id="rClear">記録を消す</button>':''}
+    </div>`,
     e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;
-      if(k==='Escape'||k==='Enter'||k===' '||k==='v'){closeModal();return true}
+      if(k==='Escape'||k==='v'){closeModal();return true}
       return false});
   $('rClose').onclick=closeModal;
+  if($('rClear'))$('rClear').onclick=confirmClearRecord;
+}
+function confirmClearRecord(){
+  showModal(`<h2>記録を消す</h2>
+    <p>最深到達も脱出成功の回数も消える。元にはもどせない。いま潜っている洞くつはそのまま続く。</p>
+    <div class="btnrow"><button class="pri" id="rKeep" data-focus>やめる</button><button id="rGo">消す</button></div>`,
+    e=>{if(e.key==='Escape'){renderRecord();return true}return false});
+  $('rKeep').onclick=renderRecord;
+  $('rGo').onclick=()=>{
+    try{localStorage.removeItem(BEST_KEY)}catch(e){}
+    G.mark=G.seq;msg('記録を消した');
+    renderRecord();
+  };
 }
 function titleScreen(){
   const b=readBest();

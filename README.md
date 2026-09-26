@@ -44,7 +44,7 @@ python3 -m http.server 8000
 
 ## メモ
 
-- 最高記録は localStorage（キー: `tomoshibi.best`）に保存。`V` キーか「記録」ボタンでいつでも参照できる。
+- 最高記録は localStorage（キー: `tomoshibi.best`）に保存。`V` キーか「記録」ボタンで参照でき、同じ画面の「記録を消す」から消去もできる（確認あり）。
 
 ## ライセンス
 
