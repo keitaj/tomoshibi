@@ -23,6 +23,7 @@ python3 -m http.server 8000
 | 足踏み | R / . |
 | 道具 | I |
 | 地図 | M |
+| 最高記録 | V |
 | 階段を降りる | G |
 
 スマホでは画面下の十字パッドとボタンで操作する。
@@ -43,7 +44,7 @@ python3 -m http.server 8000
 
 ## メモ
 
-- 最高記録は localStorage（キー: `tomoshibi.best`）に保存。
+- 最高記録は localStorage（キー: `tomoshibi.best`）に保存。`V` キーか「記録」ボタンでいつでも参照できる。
 
 ## ライセンス
 

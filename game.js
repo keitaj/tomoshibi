@@ -575,6 +575,26 @@ function saveBest(won){
     localStorage.setItem(BEST_KEY,JSON.stringify(b));
   }catch(e){}
 }
+function recordBody(b){
+  if(!b||!b.floor)return '<p>まだ記録がない。洞くつをおりると、いちばん深く到達した階が残る。</p>';
+  return `<dl class="stats">
+      <dt>最深到達</dt><dd>地下${b.floor}階${b.floor>=MAXF?'（出口）':''}</dd>
+      <dt>脱出成功</dt><dd>${b.clears||0}回</dd>
+    </dl>`;
+}
+function openRecord(){
+  if(!G||G.busy||G.over||modal)return;
+  const b=readBest(),now=G.floor;
+  const chase=!b||!b.floor?'':b.floor>=now?`記録更新まであと${b.floor-now+1}階。`:'記録を更新中。';
+  showModal(`<h2>最高記録</h2>
+    ${recordBody(b)}
+    ${now?`<p class="best">いまは地下${now}階。${chase}</p>`:''}
+    <div class="btnrow"><button class="pri" id="rClose" data-focus>とじる</button></div>`,
+    e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;
+      if(k==='Escape'||k==='Enter'||k===' '||k==='v'){closeModal();return true}
+      return false});
+  $('rClose').onclick=closeModal;
+}
 function titleScreen(){
   const b=readBest();
   showModal(`<div class="title">
@@ -699,6 +719,7 @@ addEventListener('keydown',e=>{
   if(k===' '||k==='Enter'||k==='f'){e.preventDefault();act(attackFront);return}
   if(k==='i'||k==='Tab'){e.preventDefault();openInv();return}
   if(k==='m'){toggleMap();return}
+  if(k==='v'){e.preventDefault();openRecord();return}
   if(k==='g'||k==='>'){e.preventDefault();stairsButton();return}
 });
 function toggleMap(){if(!G)return;G.showMap=!G.showMap;$('bMap').setAttribute('aria-pressed',G.showMap?'true':'false')}
@@ -707,6 +728,7 @@ $('bAtk').onclick=()=>act(attackFront);
 $('bInv').onclick=openInv;
 $('bFace').onclick=()=>{if(!G||G.over)return;G.turnMode=!G.turnMode;updateHUD()};
 $('bMap').onclick=toggleMap;
+$('bRec').onclick=openRecord;
 $('bStairs').onclick=stairsButton;
 document.querySelectorAll('#pad button').forEach(btn=>{
   let t1=null,t2=null;

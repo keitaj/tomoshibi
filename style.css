@@ -53,14 +53,14 @@ button[aria-pressed="true"],.pri{background:var(--accent);color:var(--accent-ink
 .pad button{padding:0;font-size:20px}
 .pad .mid{font-size:12px}
 .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.acts #bStairs{grid-column:1/-1}
+.acts #bRec,.acts #bStairs{grid-column:1/-1}
 .keys{margin:0;color:var(--muted);font-size:13px;display:flex;flex-wrap:wrap;gap:4px 16px}
 kbd{font-family:inherit;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;margin-right:4px;color:var(--text);background:var(--panel)}
 @media (hover:hover) and (pointer:fine){
   .pad{display:none}
   .controls{grid-template-columns:1fr}
   .acts{grid-template-columns:repeat(5,auto);justify-content:start}
-  .acts #bStairs{grid-column:auto}
+  .acts #bRec,.acts #bStairs{grid-column:auto}
 }
 @media (hover:none),(pointer:coarse){ .keys{display:none} }
 
