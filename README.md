@@ -45,3 +45,7 @@ python3 -m http.server 8000
 
 - キャラクターとアイテムは絵文字で仮置き。公開前にオリジナル素材へ差し替える。
 - 最高記録は localStorage（キー: `tomoshibi.best`）に保存。
+
+## ライセンス
+
+[MIT License](LICENSE)
